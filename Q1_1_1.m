@@ -49,6 +49,7 @@ t = 1:time;
 for i=1:4
     plot(t, p2(i,:));
 end
+hold off
 legend('Etat 1', 'Etat 2', 'Etat 3', 'Etat 4');
 
 end

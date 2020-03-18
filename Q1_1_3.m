@@ -56,6 +56,7 @@ for i = 1:4
     semilogx(t, n(i,:));
 	hold on;
 end
+hold off
 
 title({'Nombre de realisation des etats en fonction de la longueur', 'de la chaine pour une realisation donnee'});
 xlabel('Longueur de la chaine');
