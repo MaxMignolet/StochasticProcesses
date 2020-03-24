@@ -2,7 +2,9 @@
 function [m, M] = Q1_3_3(N, beta, J,  H, chain_length)
 
 s = zeros(chain_length, N); %vector state
+%generating initial state at random with null average magnetisation
 s(1, :) = [1 1 1 1 1 1 1 1 1 1];
+s(1, randsample(N, round(N/2))) = -1;
 
 m = zeros(chain_length, 1); % corresponding average magnetisation for ... 
 	% each state
