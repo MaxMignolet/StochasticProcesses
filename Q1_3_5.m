@@ -6,7 +6,7 @@ beta = 0.2;
 chain_length = 10^4;
 nb_chain = 100;
 
-H = -20:2:20;
+H = -20:1:20;
 m = zeros(length(H), 1);
 
 for i=1:length(H)
