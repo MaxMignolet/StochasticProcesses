@@ -15,11 +15,11 @@ for i=1:chain_length
 	centile_95(i) = quantile(m(i, :), 0.95);
 end
 
-figure;
-hold on
-plot(M);
-plot(centile_05);
-plot(centile_95);
-hold off
+% figure;
+% hold on
+% plot(M);
+% plot(centile_05);
+% plot(centile_95);
+% hold off
 
 end
