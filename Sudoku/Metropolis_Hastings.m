@@ -48,7 +48,8 @@ nb_iteration = i-1;
 if f(nb_iteration) == 0
 	fprintf('Success\n');
 else
-	fprintf('Failed \nEval func: %d\n', f(end));
+	fprintf('Failed \n');
 end
-
+fprintf('Eval func: %d\n', f(nb_iteration));
+display_sudoku(good_grid)
 end
