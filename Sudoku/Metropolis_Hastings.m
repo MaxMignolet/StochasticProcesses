@@ -1,18 +1,45 @@
-function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings(max_chain_length)
+function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings()
+max_chain_length = 2*10^6;
+beta = -log(0.05); % to be tuned
 
-beta = 4; % to be tuned
+% % initial_grid = zeros(9);
+
+% % initial_grid = [
+% % 	[0 0 0 8 2 3 0 0 0];
+% % 	[2 5 3 0 0 0 0 0 8];
+% % 	[8 0 0 4 0 0 0 7 0];
+% % 	[1 0 9 0 7 0 3 0 0];
+% % 	[0 0 0 9 6 1 0 0 0];
+% % 	[0 0 2 0 3 0 9 0 7];
+% % 	[0 3 0 0 0 9 0 0 2];
+% % 	[9 0 0 0 0 0 6 8 1];
+% % 	[0 0 0 7 8 6 0 0 0];
+% % 	]; % hard grid
+
+% % initial_grid = [
+% % 	[0 0 2 0 0 0 0 1 4];
+% % 	[5 8 0 0 0 7 3 0 0];
+% % 	[0 0 0 9 0 0 8 0 0];
+% % 	[0 5 0 0 1 0 0 0 0];
+% % 	[7 2 0 0 8 0 0 9 3];
+% % 	[0 0 0 0 9 0 0 5 0];
+% % 	[0 0 8 0 0 2 0 0 0];
+% % 	[0 0 4 6 0 0 0 8 1];
+% % 	[6 1 0 0 0 0 9 0 0];
+% % 	]; % medium grid
 
 initial_grid = [
-	[1 0 0 0 0 0 0 0 0];
-	[0 0 0 0 0 0 0 0 0];
-	[0 0 0 0 0 0 0 0 0];
-	[0 7 0 0 0 0 0 0 0];
-	[0 0 0 0 0 0 0 0 0];
-	[0 0 0 0 0 0 3 0 0];
-	[0 0 0 0 0 0 0 0 0];
-	[0 0 0 0 0 0 0 4 0];
-	[0 0 0 0 0 0 0 0 0];
+	[4 0 6 3 8 0 0 2 0];
+	[5 0 3 7 0 4 0 0 0];
+	[0 0 0 9 0 0 8 4 3];
+	[2 3 0 0 1 0 9 0 0];
+	[0 4 0 0 0 0 5 7 1];
+	[0 5 0 6 4 7 0 0 0];
+	[9 0 1 4 0 8 3 0 0];
+	[0 6 4 0 0 0 0 0 7];
+	[8 0 5 1 0 3 0 9 2];
 	];
+
 % generation d'une grille avec sous-carre et colonnes correctes
 grid = zeros(9);
 for i=1:9

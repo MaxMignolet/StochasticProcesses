@@ -5,7 +5,7 @@ function s = proposition(grid)
 % choose two digits at random
 % permute the two digits
 
-col = randi(9, 1);
+col = randi(9);
 indices_to_permute = randsample(9, 2);
 lin_1 = indices_to_permute(1);
 lin_2 = indices_to_permute(2);
@@ -16,9 +16,26 @@ grid(lin_1, col) = digit_2;
 grid(lin_2, col) = digit_1;
 
 % numero des sous carre selon la verticale (1, 2, 3)
-subsquare_1 = idivide(lin_1 - 1, int8(3)) + 1;
-subsquare_2 = idivide(lin_2 - 1, int8(3)) + 1;
+% subsquare_1 = idivide(lin_1 - 1, int8(3)) + 1;
+% subsquare_2 = idivide(lin_2 - 1, int8(3)) + 1;
+switch lin_1
+	case {1, 2, 3}
+		subsquare_1 = 1;
+	case {4, 5, 6}
+		subsquare_1 = 2;
+	case {7, 8, 9}
+		subsquare_1 = 3;
+end
 
+switch lin_2
+	case {1, 2, 3}
+		subsquare_2 = 1;
+	case {4, 5, 6}
+		subsquare_2 = 2;
+	case {7, 8, 9}
+		subsquare_2 = 3;
+end
+	
 if subsquare_1 == subsquare_2
 	s = grid;
 	return; % nothing more to do
@@ -29,8 +46,8 @@ sub_indices_1 = (subsquare_1 - 1)*3 + 1: subsquare_1 * 3;
 sub_indices_2 = (subsquare_2 - 1)*3 + 1: subsquare_2 * 3;
 % les 2 autres colonnes appartenants aux memes sous carr?s que col
 columns = zeros(1, 2);
-columns(1) = idivide(col-1, int8(3))*3 + mod(mod(col-1, 3) + 1, 3) + 1;
-columns(2) = idivide(col-1, int8(3))*3 + mod(mod(col-1, 3) + 2, 3) + 1;
+columns(1) = col - mod(col-1, 3) + mod(mod(col-1, 3) + 1, 3);
+columns(2) = col - mod(col-1, 3) + mod(mod(col-1, 3) + 2, 3);
 
 % lin_x et col_x sont en coord relatives
 % pour avoir coord absolues:
@@ -45,7 +62,7 @@ if col_a == col_b
 else
 	% nous allons devoir trouver un troisieme nombre ? permuter
 	do = true;
-	lin_c = randsample(3, 1);
+	lin_c = randi(3);
 	col_c = col_a;
 	while do %mathematically it will always exit after at most 3 attempts
 		lin_c = mod(lin_c, 3) + 1;

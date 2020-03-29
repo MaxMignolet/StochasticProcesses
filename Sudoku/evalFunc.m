@@ -7,7 +7,7 @@ function h = evalFunc(grid, initial_grid)
 % returns the number f+g
 % f is the number of digits appearing twice in the lines of the grid
 % if a digit appears three times in a same line, counted as 2 duplicates
-% g is twice the number of mismatching fixed digits
+% g is the number of mismatching fixed digits
 
 N = 9; % size of the grid
 
