@@ -15,11 +15,18 @@ for i=1:chain_length
 	centile_95(i) = quantile(m(i, :), 0.95);
 end
 
-% figure;
-% hold on
-% plot(M);
-% plot(centile_05);
-% plot(centile_95);
-% hold off
+set(0,'defaultaxesfontsize',15);
+set(0,'defaulttextfontsize',15);
+set(0,'defaultlinelinewidth',1.5);
+figure;
+title('Convergence de la magnetisation moyenne');
+xlabel('Longueur de la chaine');
+ylabel('Magnetisation');
+hold on
+plot(M);
+plot(centile_05);
+plot(centile_95);
+hold off
+legend('Magnetisation moyenne', '5eme centile', '95eme centile');
 
 end

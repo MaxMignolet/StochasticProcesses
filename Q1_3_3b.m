@@ -1,5 +1,5 @@
 
-function [m, M] = Q1_3_3(N, beta, J,  H, chain_length)
+function [m, M] = Q1_3_3b(N, beta, J,  H, chain_length)
 
 s = [1 -1 1 -1 1 -1 1 -1 1 -1]; % vector state
 % generated at random
@@ -7,7 +7,6 @@ s = [1 -1 1 -1 1 -1 1 -1 1 -1]; % vector state
 m = zeros(1, chain_length); % corresponding average magnetisation for ... 
 	% each state
 m(1) = mean(s);
-M = zeros(1, chain_length); % evolutive estimated average magnetisation
 
 for i=2:chain_length
 	j = randi(N); % particle to flip
@@ -29,19 +28,9 @@ for i=2:chain_length
 		s(j) = flip(s(j));
 	end
 	m(i) = mean(s);
-	M(i) = mean(m(1:i));
 end
 
-% set(0,'defaultaxesfontsize',15);
-% set(0,'defaulttextfontsize',15);
-% set(0,'defaultlinelinewidth',1.5);
-% figure;
-% title({'Evolution de la magnetisation moyenne', 'en fonction de la longueur de la chaine'});
-% xlabel('Longueur de la chaine');
-% ylabel('Magnetisation');
-% hold on
-% plot(M);
-% hold off
+M = mean(m); % evolutive estimated average magnetisation
 
 end
 function t = flip(s)
