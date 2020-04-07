@@ -1,7 +1,7 @@
 function [good_grid, nb_iteration, grids, f] = Simulated_Annealing()
 max_chain_length = 2*10^6;
-beta = 1.5; % initial value
-beta_max = 5;
+beta = 2; % initial value
+beta_max = 3.8;
 step = (beta_max - beta) / max_chain_length;
 % attention aux possibles erreurs d'arrondis num?rique
 
@@ -20,15 +20,15 @@ step = (beta_max - beta) / max_chain_length;
 % 	]; % hard grid
 
 initial_grid = [
-	[0 0 2 0 0 0 0 1 4];
-	[5 8 0 0 0 7 3 0 0];
-	[0 0 0 9 0 0 8 0 0];
-	[0 5 0 0 1 0 0 0 0];
-	[7 2 0 0 8 0 0 9 3];
-	[0 0 0 0 9 0 0 5 0];
-	[0 0 8 0 0 2 0 0 0];
-	[0 0 4 6 0 0 0 8 1];
-	[6 1 0 0 0 0 9 0 0];
+	[0 0 6 1 0 0 0 0 0];
+	[0 1 3 2 4 0 0 6 7];
+	[0 0 8 0 5 0 0 1 4];
+	[0 5 2 0 0 7 0 0 8];
+	[1 0 0 0 2 0 0 0 5];
+	[7 0 0 9 0 0 2 3 0];
+	[2 9 0 0 7 0 4 0 0];
+	[3 4 0 0 9 8 1 2 0];
+	[0 0 0 0 0 2 7 0 0];
 	]; % medium grid
 
 % initial_grid = [

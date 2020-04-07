@@ -1,6 +1,6 @@
 function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings2()
-max_chain_length = 10^5;
-beta = 1.8; % to be tuned
+max_chain_length = 10^6;
+beta = 3.5; % to be tuned
 
 % % initial_grid = zeros(9);
 % 
@@ -16,29 +16,29 @@ beta = 1.8; % to be tuned
 % 	[0 0 0 7 8 6 6 0 0];
 % 	]; % hard grid
 
-initial_grid = [
-	[0 0 2 0 0 0 0 1 4];
-	[5 8 0 0 0 7 3 0 0];
-	[0 0 0 9 0 0 8 0 0];
-	[0 5 0 0 1 0 0 0 0];
-	[7 2 0 0 8 0 0 9 3];
-	[0 0 0 0 9 0 0 5 0];
-	[0 0 8 0 0 2 0 0 0];
-	[0 0 4 6 0 0 0 8 1];
-	[6 1 0 0 0 0 9 0 0];
-	]; % medium grid
-
 % initial_grid = [
-% 	[4 0 6 3 8 0 0 2 0];
-% 	[5 0 3 7 0 4 0 0 0];
-% 	[0 0 0 9 0 0 8 4 3];
-% 	[2 3 0 0 1 0 9 0 0];
-% 	[0 4 0 0 0 0 5 7 1];
-% 	[0 5 0 6 4 7 0 0 0];
-% 	[9 0 1 4 0 8 3 0 0];
-% 	[0 6 4 0 0 0 0 0 7];
-% 	[8 0 5 1 0 3 0 9 2];
-% 	];
+% 	[0 0 6 1 0 0 0 0 0];
+% 	[0 1 3 2 4 0 0 6 7];
+% 	[0 0 8 0 5 0 0 1 4];
+% 	[0 5 2 0 0 7 0 0 8];
+% 	[1 0 0 0 2 0 0 0 5];
+% 	[7 0 0 9 0 0 2 3 0];
+% 	[2 9 0 0 7 0 4 0 0];
+% 	[3 4 0 0 9 8 1 2 0];
+% 	[0 0 0 0 0 2 7 0 0];
+% 	]; % medium grid
+
+initial_grid = [
+	[4 0 6 3 8 0 0 2 0];
+	[5 0 3 7 0 4 0 0 0];
+	[0 0 0 9 0 0 8 4 3];
+	[2 3 0 0 1 0 9 0 0];
+	[0 4 0 0 0 0 5 7 1];
+	[0 5 0 6 4 7 0 0 0];
+	[9 0 1 4 0 8 3 0 0];
+	[0 6 4 0 0 0 0 0 7];
+	[8 0 5 1 0 3 0 9 2];
+	];
 
 % Compute the number of element missing for each value.
 % So if there is already six times 1 in the grid, there missing three 1.
@@ -97,7 +97,7 @@ f = zeros(max_chain_length, 1);
 f(1) = evalFunc2(grids(:, :, 1));
 
 
-%si f vaut 0 on a trouvé une solution satisfaisante à mes yeux et celle de
+%si f vaut 0 on a trouv? une solution satisfaisante ? mes yeux et celle de
 %Geurts et de Laurine
 i = 2;
 while(i < max_chain_length + 1 && f(i-1) ~=0)
