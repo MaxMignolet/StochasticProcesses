@@ -56,7 +56,7 @@ c1 = 1;
 r2 = 1;
 c2 = 1;
 while grid(r1, c1) == grid(r2, c2)
-    if rand() > proba_take_conflic
+    if rand() > proba_take_conflic && length(row_to_swap) > 0
         index2 = randi(length(row_to_swap));
         r1 = row_to_swap(index2);
         c1 = col_to_swap(index2);
@@ -65,7 +65,7 @@ while grid(r1, c1) == grid(r2, c2)
         r1 = row_not_def(index2);
         c1 = col_not_def(index2);
     end
-    if rand() > proba_take_conflic
+    if rand() > proba_take_conflic && length(row_to_swap) > 0
         index1 = randi(length(row_to_swap));
         r2 = row_to_swap(index1);
         c2 = col_to_swap(index1);
