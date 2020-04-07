@@ -9,8 +9,8 @@ function s = proposition_good3(grid, row_not_def, col_not_def, mask_row, mask_co
 N = 9; % size of the grid
 proba_take_conflic = 0.5;
 
-row_to_swap = zeros(1, 1);
-col_to_swap = zeros(1, 1);
+row_to_swap = [];
+col_to_swap = [];
 
 % Next index where to store an element that raises a conflict
 index4swap = 1;%length(col_not_def) + 1;
