@@ -36,6 +36,7 @@ end
 % set(0,'defaulttextfontsize',15);
 % set(0,'defaultlinelinewidth',1.5);
 % figure;
+% axis([0 10^4 0 1])
 % title({'Evolution de la magnetisation moyenne', 'en fonction de la longueur de la chaine'});
 % xlabel('Longueur de la chaine');
 % ylabel('Magnetisation');

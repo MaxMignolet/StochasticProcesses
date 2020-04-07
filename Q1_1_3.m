@@ -60,7 +60,7 @@ hold off
 
 title({'Nombre de realisation des etats en fonction de la longueur', 'de la chaine pour une realisation donnee'});
 xlabel('Longueur de la chaine');
-ylabel({'Nombre de r?alisations', '(rapporte a la longueur de la chaine)'});
+ylabel({'Nombre de realisations', '(rapporte a la longueur de la chaine)'});
 legend('Etat 1', 'Etat 2', 'Etat 3', 'Etat 4');
 
 end

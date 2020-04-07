@@ -1,4 +1,4 @@
-function M = Q1_3_4(N, beta, J,  H, chain_length, nb_chain)
+function [M, centile_05, centile_95] = Q1_3_4(N, beta, J,  H, chain_length, nb_chain)
 
 m = zeros(chain_length, nb_chain);
 
@@ -19,6 +19,7 @@ set(0,'defaultaxesfontsize',15);
 set(0,'defaulttextfontsize',15);
 set(0,'defaultlinelinewidth',1.5);
 figure;
+axis([0 10^4 0 1])
 title('Convergence de la magnetisation moyenne');
 xlabel('Longueur de la chaine');
 ylabel('Magnetisation');
