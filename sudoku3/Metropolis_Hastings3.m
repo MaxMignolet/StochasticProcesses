@@ -98,11 +98,18 @@ f = zeros(max_chain_length, 1);
 [f(1), mask_row, mask_col, mask_square] = evalFunc3(grids(:, :, 1));
 
 i = 2;
-while(i <= max_chain_length && f(i-1) ~= 0)
+while(i <= max_chain_length )
 	y = proposition_good3(grids(:, :, i-1), row_not_def, col_not_def, mask_row, mask_col, mask_square, initial_grid);
 	[f_y, mask_row, mask_col, mask_square] = evalFunc3(y);
+	if f_y == 0
+		grids(:, :, i) = y;
+		f(i) = f_y;
+		i = i + 1;
+       		 break;
+   	 end
+    
 
-    alpha = min(1,  exp(-beta * (f_y - f(i-1))));
+   	alpha = min(1,  exp(-beta * (f_y - f(i-1))));
 	u = rand();
 	if u < alpha
         
