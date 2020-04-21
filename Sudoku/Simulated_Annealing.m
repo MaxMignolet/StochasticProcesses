@@ -1,5 +1,5 @@
-function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings(...
-	initial_grid, beta, max_comp_time, max_chain_length)
+function [good_grid, nb_iteration, grids, f] = Simulated_Annealing(...
+	initial_grid, beta_min, beta_step, max_comp_time, max_chain_length)
 
 tic
 
@@ -16,6 +16,7 @@ grids(:, :, 1) = grid;
 f = zeros(max_chain_length, 1);
 f(1) = evalFunc(grids(:, :, 1), initial_grid);
 
+beta = beta_min;
 i = 2;
 while(i <= max_chain_length && toc < max_comp_time && f(i-1) ~=0)
 	y = proposition(grids(:, :, i-1));
@@ -31,16 +32,17 @@ while(i <= max_chain_length && toc < max_comp_time && f(i-1) ~=0)
 		f(i) = f(i-1);
 	end
 	i = i + 1;
+	beta = beta + beta_step;
 end
-f = f(1:i-1);
 
 good_grid = grids(:, :, i-1);
 nb_iteration = i-1;
 if f(nb_iteration) == 0
 	fprintf('Success\n');
+	f = f(1:i-1);
 else
 	fprintf('Failed \n');
 end
 fprintf('Eval func: %d\n', f(nb_iteration));
-% display_sudoku(good_grid)
+%display_sudoku(good_grid)
 end
