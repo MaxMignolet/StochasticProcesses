@@ -1,4 +1,4 @@
-function [good_grid, nb_iteration, grids, f] = Parallel_Tempering(...
+function [good_grid, nb_iteration, grids, f, found] = Parallel_Tempering(...
 	initial_grid, beta, max_comp_time, max_chain_length)
 
 tic
@@ -50,8 +50,8 @@ while(i < max_chain_length + 1 && toc < max_comp_time && found == false)
 	
 	% possible swap of states of two random system (different temperature)
 	index = randsample(nb_chain, 2);
-	p = min(1, (f(index(1), i) - f(index(2), i)) * ...
-		(beta(index(1)) - beta(index(2))));
+	p = min(1, exp((f(index(1), i) - f(index(2), i)) * ...
+		(beta(index(1)) - beta(index(2)))));
 	u = rand();
 	if u < p
 		tmp = grids(:, :, index(1), i);
