@@ -16,8 +16,6 @@ grid(lin_1, col) = digit_2;
 grid(lin_2, col) = digit_1;
 
 % numero des sous carre selon la verticale (1, 2, 3)
-% subsquare_1 = idivide(lin_1 - 1, int8(3)) + 1;
-% subsquare_2 = idivide(lin_2 - 1, int8(3)) + 1;
 switch lin_1
 	case {1, 2, 3}
 		subsquare_1 = 1;
@@ -64,7 +62,7 @@ else
 	do = true;
 	lin_c = randi(3);
 	col_c = col_a;
-	while do %mathematically it will always exit after at most 3 attempts
+	while do % mathematiquement: maximum 3 iterations
 		lin_c = mod(lin_c, 3) + 1;
 		digit_c = grid(sub_indices_1(lin_c), columns(col_c));
 		

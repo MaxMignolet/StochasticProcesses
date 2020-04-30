@@ -1,43 +1,11 @@
-function [good_grid, nb_iteration, grids, f] = LundyMees()
-max_chain_length = 10^6;
-beta = 2%-log(0.05); % to be tuned
+function [good_grid, nb_iteration, grids, f] = LundyMees(...
+	initial_grid, beta_start, beta_end, max_comp_time, max_chain_length)
 
-% % initial_grid = zeros(9);
-% initial_grid = [
-% 	[0 0 0 8 2 3 0 0 0];
-% 	[2 5 3 0 0 0 0 0 8];
-% 	[8 0 0 4 0 0 0 7 0];
-% 	[1 0 9 0 7 0 3 0 0];
-% 	[0 0 0 9 6 1 0 0 0];
-% 	[0 0 2 0 3 0 9 0 7];
-% 	[0 3 0 0 0 9 0 0 2];
-% 	[9 0 0 0 0 0 6 8 1];
-% 	[0 0 0 7 8 6 0 0 0];
-% 	]; % hard grid
-% % 
-initial_grid = [
-	[0 0 6 1 0 0 0 0 0];
-	[0 1 3 2 4 0 0 6 7];
-	[0 0 8 0 5 0 0 1 4];
-	[0 5 2 0 0 7 0 0 8];
-	[1 0 0 0 2 0 0 0 5];
-	[7 0 0 9 0 0 2 3 0];
-	[2 9 0 0 7 0 4 0 0];
-	[3 4 0 0 9 8 1 2 0];
-	[0 0 0 0 0 2 7 0 0];
-	]; % medium grid
-% 
-% initial_grid = [
-% 	[4 0 6 3 8 0 0 2 0];
-% 	[5 0 3 7 0 4 0 0 0];
-% 	[0 0 0 9 0 0 8 4 3];
-% 	[2 3 0 0 1 0 9 0 0];
-% 	[0 4 0 0 0 0 5 7 1];
-% 	[0 5 0 6 4 7 0 0 0];
-% 	[9 0 1 4 0 8 3 0 0];
-% 	[0 6 4 0 0 0 0 0 7];
-% 	[8 0 5 1 0 3 0 9 2];
-% 	]; % easy grid
+tic
+
+n = max_chain_length;
+delta = (1/beta_start - 1/beta_end) / (n * 1/beta_start * 1/beta_end);
+beta = beta_start;
 
 % generation d'une grille avec sous-carre et colonnes correctes
 grid = zeros(9);
@@ -53,7 +21,7 @@ f = zeros(max_chain_length, 1);
 f(1) = evalFunc(grids(:, :, 1), initial_grid);
 
 i = 2;
-while(i < max_chain_length + 1 && f(i-1) ~=0)
+while(i < max_chain_length + 1 && toc < max_comp_time && f(i-1) ~=0)
 	y = proposition(grids(:, :, i-1));
 	f_y = evalFunc(y, initial_grid);
     
@@ -69,26 +37,27 @@ while(i < max_chain_length + 1 && f(i-1) ~=0)
 	end
 	i = i + 1;
     
-    beta =( (1/beta)/(1+0.00001*1/beta) )^-1
+    beta =( (1/beta)/(1+delta*1/beta) )^-1;
 end
 
 good_grid = grids(:, :, i-1);
-nb_iteration = i-1
+nb_iteration = i-1;
 if f(nb_iteration) == 0
 	fprintf('Success\n');
 else
 	fprintf('Failed \n');
 end
-% fprintf('Eval func: %d %d\n', f(nb_iteration), nb_iteration);
+fprintf('Eval func: %d %d\n', f(nb_iteration), nb_iteration);
 % display_sudoku(good_grid)
 
-set(0,'defaultaxesfontsize',15);
-set(0,'defaulttextfontsize',15);
-set(0,'defaultlinelinewidth',1.5);
-figure(2);
-title({'Convergence de la fonction f(x) a minimiser', 'avec proposition.m'});
-xlabel('Nombre iterations');
-ylabel('f(x)');
-hold on
-plot(f(1:nb_iteration));
+% set(0,'defaultaxesfontsize',15);
+% set(0,'defaulttextfontsize',15);
+% set(0,'defaultlinelinewidth',1.5);
+% figure(2);
+% title({'Convergence de la fonction f(x) a minimiser', 'avec proposition.m'});
+% xlabel('Nombre iterations');
+% ylabel('f(x)');
+% hold on
+% plot(f(1:nb_iteration));
+% hold off
 end

@@ -1,5 +1,5 @@
 function [good_grid, nb_iteration, grids, f] = Simulated_Annealing(...
-	initial_grid, beta_min, beta_step, max_comp_time, max_chain_length)
+	initial_grid, beta_min, beta_max, max_comp_time, max_chain_length)
 
 tic
 
@@ -32,7 +32,7 @@ while(i <= max_chain_length && toc < max_comp_time && f(i-1) ~=0)
 		f(i) = f(i-1);
 	end
 	i = i + 1;
-	beta = beta + beta_step;
+	beta = beta_min + i*(beta_max - beta_min)/max_chain_length;
 end
 
 good_grid = grids(:, :, i-1);
