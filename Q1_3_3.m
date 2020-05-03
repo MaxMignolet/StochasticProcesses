@@ -1,4 +1,3 @@
-
 function [m, M] = Q1_3_3(N, beta, J,  H, chain_length)
 
 s = [1 -1 1 -1 1 -1 1 -1 1 -1]; % vector state
