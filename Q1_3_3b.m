@@ -1,8 +1,7 @@
-
 function [m, M] = Q1_3_3b(N, beta, J,  H, chain_length)
 
 s = [1 -1 1 -1 1 -1 1 -1 1 -1]; % vector state
-% generated at random
+
 
 m = zeros(1, chain_length); % corresponding average magnetisation for ... 
 	% each state
@@ -30,7 +29,7 @@ for i=2:chain_length
 	m(i) = mean(s);
 end
 
-M = mean(m); % evolutive estimated average magnetisation
+M = mean(m); % estimated average magnetisation
 
 end
 function t = flip(s)

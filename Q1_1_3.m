@@ -1,9 +1,9 @@
-function n = Q1_1_3(time)
+function n = Q1_1_3(nb_iteration)
 
 Q = [0 0.1 0.1 0.8 ; 1 0 0 0 ; 0.6 0 0.1 0.3 ; 0.4 0.1 0.5 0];
 
-s = zeros(1, time); %vector of states
-n = zeros(4, time);
+s = zeros(1, nb_iteration); %vector of states
+n = zeros(4, nb_iteration);
 
 [V, ~] = eig(transpose(Q));
 distrib_stat = V(:, 1) / norm(V(:, 1), 1);
@@ -22,7 +22,7 @@ end
 n(s(1), 1) = 1;
 
 temp = zeros(1, 4);
-for i=2:time
+for i=2:nb_iteration
     for j=1:4
         temp(j) = Q(s(i-1), j);
     end
@@ -42,11 +42,11 @@ for i=2:time
     n(:, i) = n(:, i);
 end
 
-for i=2:time
+for i=2:nb_iteration
     n(:, i) = n(:, i) / i;
 end
 
-t = 1:time;
+t = 1:nb_iteration;
 %figure;
 set(0,'defaultaxesfontsize',15);
 set(0,'defaulttextfontsize',15);
