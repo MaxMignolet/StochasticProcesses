@@ -2,7 +2,7 @@ function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings2(g)
 tic;
 max_chain_length = 10^6;
 max_comp_time = 120;
-beta = 4; % to be tuned
+beta = -log(0.05); % to be tuned
 
 if nargin == 0
 	% % initial_grid = zeros(9);
