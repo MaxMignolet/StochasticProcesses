@@ -1,4 +1,4 @@
-function s = proposition3(grid, row_not_def, col_not_def, mask_row, mask_col, mask_square, grid_init)
+function s = proposition_good3(grid, row_not_def, col_not_def, mask_row, mask_col, mask_square, grid_init)
 % grid: 9x9 matrix representing a full grid
 % row_not_def: the row indices of the non-defined values
 % col_not_def: the col indices of the non-defined values
@@ -7,12 +7,13 @@ function s = proposition3(grid, row_not_def, col_not_def, mask_row, mask_col, ma
 % The elements that cause conflics have a higher propability to be swapped. 
 
 N = 9; % size of the grid
+proba_take_conflic = 0.5;
 
-row_to_swap = row_not_def;
-col_to_swap = col_not_def;
+row_to_swap = [];
+col_to_swap = [];
 
 % Next index where to store an element that raises a conflict
-index4swap = length(col_not_def) + 1;
+index4swap = 1;%length(col_not_def) + 1;
 
 % Store the elements (once per conflic) that causes conflic
 for row = 1:N
@@ -49,18 +50,35 @@ for row = 1:N
     end
 end
 
-index1 = randi(length(row_to_swap));
-index2 = randi(length(row_to_swap));
-
 % Make sure the to element have a different value
-while grid(row_to_swap(index1), col_to_swap(index1)) == grid(row_to_swap(index2), col_to_swap(index2))
-    index1 = randi(length(row_to_swap));
-    index2 = randi(length(row_to_swap));
+r1 = 1;
+c1 = 1;
+r2 = 1;
+c2 = 1;
+while grid(r1, c1) == grid(r2, c2)
+    if rand() > proba_take_conflic && length(row_to_swap) > 0
+        index2 = randi(length(row_to_swap));
+        r1 = row_to_swap(index2);
+        c1 = col_to_swap(index2);
+    else
+        index2 = randi(length(row_not_def));
+        r1 = row_not_def(index2);
+        c1 = col_not_def(index2);
+    end
+    if rand() > proba_take_conflic && length(row_to_swap) > 0
+        index1 = randi(length(row_to_swap));
+        r2 = row_to_swap(index1);
+        c2 = col_to_swap(index1);
+    else
+        index1 = randi(length(row_not_def));
+        r2 = row_not_def(index1);
+        c2 = col_not_def(index1);
+    end
 end
 
-tmp = grid(row_to_swap(index1), col_to_swap(index1));
-grid(row_to_swap(index1), col_to_swap(index1)) = grid(row_to_swap(index2), col_to_swap(index2));
-grid(row_to_swap(index2), col_to_swap(index2)) = tmp;
+tmp = grid(r1, c1);
+grid(r1, c1) = grid(r2, c2);
+grid(r2, c2) = tmp;
 
 s = grid;
 

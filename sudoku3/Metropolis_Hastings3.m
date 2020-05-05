@@ -1,7 +1,7 @@
 function [good_grid, nb_iteration, grids, f] = Metropolis_Hastings3()
 close all;
 max_chain_length = 10^5;
-beta = 1.8;% -log(0.05) % to be tuned
+beta = -log(0.05) % to be tuned
 
 % % initial_grid = zeros(9);
 
@@ -99,7 +99,7 @@ f = zeros(max_chain_length, 1);
 
 i = 2;
 while(i <= max_chain_length )
-	y = proposition_good3(grids(:, :, i-1), row_not_def, col_not_def, mask_row, mask_col, mask_square, initial_grid);
+	y = proposition3(grids(:, :, i-1), row_not_def, col_not_def, mask_row, mask_col, mask_square, initial_grid);
 	[f_y, mask_row, mask_col, mask_square] = evalFunc3(y);
 	if f_y == 0
 		grids(:, :, i) = y;
